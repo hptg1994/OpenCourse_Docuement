@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>readPhoto</title>
+</head>
+
+<body>
+  <input type="file">
+  <img src="" alt="">
+  <script>
+    // upload a photo, and display it within the page
+    // get the upload photo 
+    let file = document.querySelector("input");
+    file.onchange = function () {
+      // create reader instance
+      let fileReader = new FileReader();
+      // read the photo
+      fileReader.readAsDataURL(file.files[0]);
+      //loading prcedure
+      fileReader.onload = function () {
+        /* let image = document.createElement("img");
+        image.src = this.result;
+        document.body.appendChild(image); */
+        document.querySelector("img").src = this.result; // this.result is a property of FileReader
+      }
+    }
+  </script>
+
+</body>
+
+</html>

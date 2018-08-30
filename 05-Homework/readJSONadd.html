@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>readJSONadd</title>
+  <style>
+  </style>
+</head>
+
+<body>
+  <form action="">
+    <fieldset>
+      <legend>Student Profile</legend>
+      <label for="">
+        Name:<input type="text" name="name" autofocus placeholder="请输入姓名" />
+      </label>
+      <label for="">
+        Gender:<input type="text" name="sex" autofocus placeholder="请输入性别" />
+      </label>
+      <label for="">
+        Age:<input type="text" name="age" autofocus placeholder="请输入年龄" />
+      </label>
+      <label for="" class="btn">
+        <input type="submit" value="Saved" id="saved" />
+      </label>
+      <label for="" class="import">
+        <input type="file" />
+      </label>
+    </fieldset>
+  </form>
+  <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+    crossorigin="anonymous"></script>
+  <script>
+    // 1. read the uploaded file,insert the data into localstorage
+    $(".import input").on("change", function () {
+      let file = this.files[0]
+      let fileReader = new FileReader();
+      fileReader.readAsText(file); // will generate this.result property
+      fileReader.onload = function () {
+        let list = this.result
+        // put all the data into localstorage
+        localStorage.setItem("list", list);
+      }
+    })
+    // 2. insert the data to localstorage from input 
+    $("#saved").click(() => {
+      // gain the form data
+      let formData = $("form").serializeArray(); // get all the form data by using serializeArray()
+      console.log(formData);
+      /* return an Array like [
+        0:{name: "name", value: "Pintaigao"},
+        1:{name: "sex", value: "Male"},
+        2:{name: "age", value: "1"}
+     ] */
+      // Define a temp object to store the data from form
+      let temp = {};
+      // Iterated all the input in form
+      $.each(formData, function (k, v) {
+        temp[v.name] = v.value;
+        console.log(temp[v.name]);
+      });
+      // read the data from localstorage(if import json file and filling input are done on same times, the form data need to be joined in the json file and then stored in localstorage again)
+      let list = localStorage.getItem("list");
+      if (list) {
+        // string to json
+        list = JSON.parse(list);
+        // 把表单数据追加到list中
+        list.push(temp);
+        // 把对象转换成字符串的形式一起追加到localStorage中
+        localStorage.setItem("list", JSON.stringify(list));
+      } else {
+        localStorage.setItem("list", JSON.stringify([temp]));
+      }
+      // stop event
+      return false;
+    });
+  </script>
+</body>
+
+</html>
