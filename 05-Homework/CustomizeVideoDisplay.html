@@ -37,6 +37,7 @@
     // gain player tag,进度条,total time
     let video = $("video")[0];
     //  获取进度条
+    let line = $(".line");
     //  定义时分秒
     let hours, min, sec;
     video.oncanplay = () => {
@@ -63,6 +64,41 @@
         video.paused();
       }
     });
+
+    // 播放的同时设置进度条和时间要同步
+    // 正在播放的事件
+    video.ontimeupdate = () => {
+      // configure the loading bar
+      let value = 0; // loading bar's width initiate
+      if (video.currentTime > 0) {
+        // it is already on playing
+        value = video.currentTime / video.duration * 100;
+      }
+      // set the loading bar
+      line.css("width", value + "%");
+
+      // show the current time position of video
+      hours = Math.floor(video.currentTime / 3600);
+      min = Math.floor(video.currentTime / 60);
+      sec = Math.floor(video.currentTime % 60);
+      hours = hours < 10 ? "0" + hours : hours
+      min = min < 10 ? "0" + min : min
+      sec = sec < 10 ? "0" + sec : sec
+      $(".current").text(hours + ":" + min + ":" + sec)
+    }
+
+    // jumping in the loading bar
+    $(".bar").click(function (event) {
+      // 鼠标点击的横坐标/bar的宽 * 总的时间 ------> 当前时间
+      video.currentTime = (event.offsetX / $(".bar").width) * video.duration;
+    })
+
+    // if the video end ,the width of loading bar should be reset to 0, and also the player button should change
+    video.onended = function () {
+      //视频播放的按钮样式还原
+      $(".switch").removeClass("fa-pause").addClass("fa-play");
+      line.css("width", 0);
+    }
   </script>
 
 </body>
