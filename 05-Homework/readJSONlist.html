@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>readJSONList</title>
+</head>
+
+<body>
+  <table>
+    <caption>Student Info</caption>
+    <tr>
+      <th>Name</th>
+      <th>Gender</th>
+      <th>Age</th>
+      <th>Operation</th>
+    </tr>
+  </table>
+
+</body>
+<script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+  crossorigin="anonymous"></script>
+<script>
+  // get data from localStorage
+  let list = localStorage.getItem("list");
+  list = list && JSON.parse(list);
+  if (list) {
+    let html = "";
+    $.each(list, (k, v) => {
+      html += "<tr>"
+      html += "<td>" + v.name + "</td>";
+      html += "<td>" + v.sex + "</td>";
+      html += "<td>" + v.age + "</td>";
+      html += "<td><a href = 'javascript: void (0)'删除</a></td>";
+      html += "<tr>"
+    })
+  }
+  // add tr into table
+  $("table").html($("table").html() + html);
+</script>
+
+</html>

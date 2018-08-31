@@ -72,7 +72,7 @@
         // 把对象转换成字符串的形式一起追加到localStorage中
         localStorage.setItem("list", JSON.stringify(list));
       } else {
-        localStorage.setItem("list", JSON.stringify([temp]));
+        localStorage.setItem("list", JSON.stringify([temp])); // save item as an array(object in array),bc it is a list
       }
       // stop event
       return false;
