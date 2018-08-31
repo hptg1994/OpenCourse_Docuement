@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Web Animation</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+    }
+
+    body,
+    html {
+      width: 100%;
+      height: 100%;
+    }
+
+    .box {
+      width: 100%;
+      height: 100%;
+      background-color: rgb(22, 186, 157);
+      display: flex;
+      justify-content: space-around;
+      align-items: center
+    }
+
+    .left {
+      flex: 1;
+    }
+
+    .right {
+      flex: 1;
+    }
+
+    .search {
+      width: 530px;
+      height: 50px;
+      position: relative;
+      border: 1px solid white;
+      left: -550px;
+      /* From left to right moving animation */
+      /*search_box 的动画，1s的时间，匀速的方式，做完就结束了  */
+      animation: search_box 1s linear forwards;
+    }
+
+    /* Key Word in Searching input */
+    .key {
+      width: 0px;
+      height: 22px;
+      background: url("key.png") no-repeat;
+      position: absolute;
+      top: 50%;
+      margin-top: -10px;
+      /* word comes out one by one animation */
+      animation: key_img 1s steps(5) forwards 1s;
+    }
+
+    .content {
+      width: 529px;
+      height: 372px;
+      margin-top: 20px;
+      left: 50px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .content img {
+      position: absolute;
+      top: -390px;
+      animation: img_position 1s linear forwards 4s;
+    }
+
+    /* Searching input animation */
+    @keyframes search_box {
+      from {
+        left: -550px
+      }
+      to {
+        left: 50px;
+      }
+    }
+
+    /* Keyword animation */
+    @keyframes key_img {
+      from {
+        width: 0px;
+      }
+      to {
+        width: 100px;
+      }
+    }
+
+    /* Photo dropdown animation */
+    @keyframes img_position {
+      from {
+        top: -390px;
+      }
+      to {
+        top: 0px;
+      }
+    }
+  </style>
+
+</head>
+
+<body>
+  <div class="box">
+    <div class="left">
+      <div class="search">
+        <div class="key"></div>
+      </div>
+      <div class="content">
+        <img src="result.png" alt="screenshot">
+      </div>
+    </div>
+    <div class="right">
+      <img src="info_4.png" alt="">
+    </div>
+  </div>
+</body>
+
+</html>
