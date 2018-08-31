@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <link rel="stylesheet" href="player.css">
+  <link rel="stylesheet" href="font-awesome.css">
+  <title>Video</title>
+</head>
+
+<body>
+  <figure>
+    <figcaption>Video Player</figcaption>
+    <div class="player">
+      <video src="./Bokeh Video Of Leaves.mp4" width="600" height="400"></video>
+      <!-- Customized Controller -->
+      <div class="controls">
+        <a href="javascript:;" class="switch fa fa-play"></a>
+        <a href="javascript:;" class="expand fa fa-expand"></a>
+        <div class="progress">
+          <div class="loaded"></div>
+          <div class="line"></div>
+          <div class="bar"></div>
+        </div>
+        <div class="timer">
+          <span class="current">00:00:00</span>/
+          <span class="total">00:00:00</span>
+        </div>
+      </div>
+    </div>
+  </figure>
+  <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+    crossorigin="anonymous"></script>
+  <script>
+    // gain player tag,进度条,total time
+    let video = $("video")[0];
+    //  获取进度条
+    //  定义时分秒
+    let hours, min, sec;
+    video.oncanplay = () => {
+      // 展开视频
+      video.style.display = "block";
+      // caculate the time
+      hours = Math.floor(video.duration / 3600);
+      min = Math.floor(video.duration / 60);
+      sec = Math.floor(video.duration % 60);
+      hours = hours < 10 ? "0" + hours : hours
+      min = min < 10 ? "0" + min : min
+      sec = sec < 10 ? "0" + sec : sec
+      $(".total").text(hours + ":" + min + ":" + sec)
+    }
+
+    // pause and play
+    $(".switch").on("click", function () {
+      // switch the player button
+      $(".switch").toggleClass("fa-play fa-pause");
+      // check the current status is pause or play
+      if (video.paused) {
+        video.play()
+      } else {
+        video.paused();
+      }
+    });
+  </script>
+
+</body>
+
+</html>
