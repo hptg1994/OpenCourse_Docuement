@@ -99,6 +99,11 @@
       $(".switch").removeClass("fa-pause").addClass("fa-play");
       line.css("width", 0);
     }
+
+    // full screen
+    $(".expand").click(function () {
+      video.webkitRequestFullScreen();
+    })
   </script>
 
 </body>
