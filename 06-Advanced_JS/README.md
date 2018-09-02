@@ -110,14 +110,35 @@
       * Inside the instace a property call `_proto_`, it is also a instance, used by browsers
 
       * In instance `p1`, it can directly access `sayName()` funtion, via `_proto_`, and `p1`'s  constructor function ( which is `Person`) have that function inside its `prototype`, both `p1` instance's `_proto_` and `Person` 's `prototype` referencing to the same object, then `p1` instance can directly access to the method which inside that same referencing `prototype`
+
    2. **Constructor**
 
       * `Person.prototype.constructor === Person` return true
 
       * Prototype 中的 Constructor 指的就是原型对象所在的构造函数
+
    3. **Prototype Channing**
       * A relationship between instance and its belonging prototype
       * Instance's `_proto_` refering to its belonging constructor function's `prototype`
       * Also inside the `Prototype` ,there is a `_proto_`, and it point to `Object`'s Prototype, e.g: `Person.prototype._proto_ === Object.prototype` will return true
+      * 当然`Object.prototype._proto_ === null` because `_proto_` doesn't existing in Object.prototype 
 
+   4. **Object call as Function**
 
+      * When initaiting `Person` like these: `function Person()`, initiating it as a Function, and we can see that inside `Person()`, exisiting a 	`prototype` and` _proto_`, which means this Function Expression eventually will become an Object( because `_proto_` inside Instance )
+
+      * for calling Person as a Function, so `_proto` will point to `Function.prototype`
+
+      * As Function is also an Object, so `Function.prototype._proto_ === Object.prototype` will return true
+
+      * **Summary**:
+
+      * ```javascript
+        Person()
+        Person._proto_ === Function.prototype 
+        Function._proto_ === Function.prototype 
+        Function.prototype._proto_ === Object.prototype
+        Object._proto_ === Function.prototype // because inside _proto_ indicate it is a function
+        ```
+
+   5. 
