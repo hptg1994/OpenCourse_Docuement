@@ -141,4 +141,6 @@
         Object._proto_ === Function.prototype // because inside _proto_ indicate it is a function
         ```
 
+        <img alt= 'relationship map' src = "" >
+
    5. 
