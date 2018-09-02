@@ -124,5 +124,5 @@
 
 Go back to top testing 
 
-* [top](advanced-js)
+* [top](creating-object-instance)
 
