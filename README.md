@@ -1,16 +1,7 @@
 # OpenCourse Online Course Tutorial Document
 
-- Base HTML Tutorial
+### Course Content
 
-### Base HTML Tutorial:
-
-1. #### Get the user location
-
-   ```javascript
-   
-   ```
-
-2. 
 
 
 

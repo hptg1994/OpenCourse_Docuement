@@ -100,11 +100,29 @@
    }
    p1.sayName() === p2.sayName() // true,becaue now the sayName function is sharable 
    p1._proto_.sayName() === p2._proto_.sayName() // same with aboved
+   p1._proto_ = Person.prototype // true, pointing to the same object
    
    ```
 
    So the purpose of prototype:
 
-   1. Solving property sharing between relative instance and saving memory
+   1. **Solving property sharing between relative instance and saving memory**
       * Inside the instace a property call `_proto_`, it is also a instance, used by browsers
-      * In instance `p1`, `p1` can directly access `sayName()` funtion, via `_proto_`, and `p1`'s  constructor function ( which is `Person`) have that function inside its `prototype`, both `p1` instance's `_proto_` and `Person` 's `prototype` referencing to the same object, then `p1` instance can directly access to the method which inside that same referencing `prototype`
+
+      * In instance `p1`, it can directly access `sayName()` funtion, via `_proto_`, and `p1`'s  constructor function ( which is `Person`) have that function inside its `prototype`, both `p1` instance's `_proto_` and `Person` 's `prototype` referencing to the same object, then `p1` instance can directly access to the method which inside that same referencing `prototype`
+   2. **Constructor**
+
+      * `Person.prototype.constructor === Person` return true
+
+      * Prototype 中的 Constructor 指的就是原型对象所在的构造函数
+   3. **Prototype Channing**
+      * A relationship between instance and its belonging prototype
+      * Instance's `_proto_` refering to its belonging constructor function's `prototype`
+      * Also inside the `Prototype` ,there is a `_proto_`, and it point to `Object`'s Prototype, e.g: `Person.prototype._proto_ === Object.prototype` will return true
+
+
+
+Go back to top testing 
+
+* [top](advanced-js)
+
