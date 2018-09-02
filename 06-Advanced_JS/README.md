@@ -144,8 +144,36 @@
 
           <img alt= 'relationship_map' src ="https://github.com/hptg1994/OpenCourse_Docuement/blob/master/06-Advanced_JS/resource/relationship.png">
 
-
 ### 3. Inherit
+
+- It is a feature of Prototype
+
+  People —— Name, Gender, Age, Role
+
+  ```javascript
+  function Person(name, age, sex){
+      this.name = name;
+      this.age = age;
+      this.sex = sex;
+  }
+  Person.prototype.eat = function(){
+  	// do something
+  }
+  
+  // create a student function
+  function Student(sex){
+      this.sex = sex
+  }
+  /* we want student also have a eat activity, so we can use prototype to implement*/
+  Student.prototype = new Person("Pintaigao",1)
+  let stu = new Student("Male")
+  stu.name === "Pintaigao" // Inherit from Person
+  stu.age === 1 // Inherit from Peron
+  stu.sex === "Male" // Student's own property
+  stu.eat(); // also able to use
+  
+  ```
+
 
 
 
