@@ -1,6 +1,6 @@
 # Advanced JS
 
-### 1. Creating Object Instance
+### 1. Way to Create Object Instance
 
 * #### Using `new`
 
@@ -74,9 +74,9 @@
 
   - return the instance
 
-### Prototype
+### 2. Prototype
 
-1. ```javascript
+```javascript
    function Person(name,age){
        this.name = name;
        this.age = age;
@@ -101,8 +101,7 @@
    p1.sayName() === p2.sayName() // true,becaue now the sayName function is sharable 
    p1._proto_.sayName() === p2._proto_.sayName() // same with aboved
    p1._proto_ = Person.prototype // true, pointing to the same object
-   
-   ```
+```
 
    So the purpose of prototype:
 
@@ -141,7 +140,4 @@
         Object._proto_ === Function.prototype // because inside _proto_ indicate it is a function
         ```
 
-        <img alt= 'relationship_map' src = "https://github.com/hptg1994/OpenCourse_Docuement/blob/master/06-Advanced_JS/resource/relationship.png" >
-
-   5. 
-
+        <img alt= 'relationship_map' src ="https://github.com/hptg1994/OpenCourse_Docuement/blob/master/06-Advanced_JS/resource/relationship.png">
