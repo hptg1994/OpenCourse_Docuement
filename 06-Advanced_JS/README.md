@@ -121,8 +121,3 @@
       * Also inside the `Prototype` ,there is a `_proto_`, and it point to `Object`'s Prototype, e.g: `Person.prototype._proto_ === Object.prototype` will return true
 
 
-
-Go back to top testing 
-
-* [top](#字面量的方式)
-

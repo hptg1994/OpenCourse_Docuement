@@ -2,6 +2,6 @@
 
 ### Course Content
 
-
+- [Advanced Javascript](./06-Advanced_JS)
 
 
