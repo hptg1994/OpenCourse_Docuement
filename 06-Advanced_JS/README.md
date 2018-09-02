@@ -98,10 +98,13 @@
    Person.prototype.sayName = function(){
        console.log("Hello")
    }
-   p1.sayName() === p2.sayName() // true
-    
+   p1.sayName() === p2.sayName() // true,becaue now the sayName function is sharable 
+   p1._proto_.sayName() === p2._proto_.sayName() // same with aboved
    
    ```
 
-2. 
+   So the purpose of prototype:
 
+   1. Solving property sharing between relative instance and saving memory
+      * Inside the instace a property call `_proto_`, it is also a instance, used by browsers
+      * In instance `p1`, `p1` can directly access `sayName()` funtion, via `_proto_`, and `p1`'s  constructor function ( which is `Person`) have that function inside its `prototype`, both `p1` instance's `_proto_` and `Person` 's `prototype` referencing to the same object, then `p1` instance can directly access to the method which inside that same referencing `prototype`
