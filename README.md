@@ -7,4 +7,4 @@
 
 
 
-<center> Created by ﹫Pintaigao He </center>
+<p align="center">  Created by ﹫Pintaigao He </p>
