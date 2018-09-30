@@ -419,3 +419,67 @@ Person.prototype = {
   console.log(ff());
   console.log(ff());
   ```
+
+### Apply and Call
+
+* ```javascript
+  // 假设
+  function f1(x,y){
+      console.log("it is being called");
+      console.log(this);
+      console.log(x+y);
+  }
+  
+  let obj = {
+      age:20
+  }
+  // obj 对象没有可以输出内容的方法，但有一个函数f1可以输出内容并计算两个数字的额，此时可以借用
+  // 本身函数中的this是window对象,但是如果有人(对象)借用了这个函数,那么里面的this就是当前的对象了,如果在借用的时候传入的是null,默认就是window对象
+  f1.apply(obj,[10,20]);
+  f1.call(obj,50,40);
+  // apply
+  f1.apply(null,[10,20]) ====> "this will be equal to 'window'"
+  // call
+  f1.call(null,10,20)
+  
+  /* f1是函数,也是对象,但是f1本身没有添加过apply和call方法,为什么可以直接调用呢? */
+  ```
+
+* apply 和 call 方法使用及区别和作用
+
+  首先任何的一个函数都是Funtion的实例对象，就可以使用Function原型中的方法，apply和call实际上都是属于Function的，作用是可以改变this的指向，借用方法，
+
+  - apply的语法：
+    - 对象.apply(对象，【参数1，参数2，……..】)
+
+  * call 的语法：
+
+    * 对象.call（对象，参数1，参数2，参数3，……...）
+
+  ```javascript
+  //如果想要获取对象的类型是什么样子的?
+  console.log(Object.prototype.toString());//[object Object]
+  //Array对象的类型是什么样子的
+  console.log(Array.prototype.toString());
+  console.dir(Array);//此时Array中实际上是有toString方法,但是得不到我们想要的结果
+  console.log(Object.prototype.toString.call([]));//[object Array]
+  var dt=new Date();
+  console.log(dt);
+  console.log(Object.prototype.toString.call(new Date()));//[object Date]
+  ```
+
+  数组本身遍历的方法：
+
+  ```javascript
+  var arr=[10,20,30,40,50];
+  arr.forEach(function (ele) {
+      console.log(ele);
+  });
+  //forEach方法本身是属于数组的,字符串是无法使用,我们可以借用
+  var str="hello what are you no sha lei";
+  [].forEach.apply(str,[function (ele) {
+  	console.log(ele);
+  }]);
+  ```
+
+
