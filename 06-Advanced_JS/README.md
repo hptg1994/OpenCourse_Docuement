@@ -365,3 +365,57 @@ Person.prototype = {
   ```
 
 
+### 4. 闭包：
+
+​	闭包:一个函数A中包含了另一个函数B,函数B中可以访问函数A中的变量,嵌套关系
+
+​	闭包模式:函数式闭包,对象式闭包
+
+​	闭包的优点及缺点:延长作用域链,缓存数据(缓存数据的,这个也是缺点)
+
+
+
+* 函数式闭包：函数中有函数
+
+  ```javascript
+  function a(age) {
+    return function () {
+      return age+10;
+    }
+  }
+  console.log(a(20)());
+  ```
+* 对象式闭包：函数中有对象
+
+  ```javascript
+  function f1(age) {
+    return {
+      age:age+20
+    }
+  }
+  console.log(f1(20).age);
+  ```
+
+* 通过闭包缓存数据
+
+  ```javascript
+  function f1() {
+    var num=parseInt(Math.random()*10+1);
+    return num;
+  }
+  console.log(f1());
+  console.log(f1());
+  console.log(f1());
+  //通过闭包实现,把每次产生的随机数都是一样的来进行缓存
+  function f2() {
+    var num=parseInt(Math.random()*10+1);
+    return function () {
+      return num;
+    }
+  }
+  var ff=f2();
+  console.log(ff());
+  console.log(ff());
+  console.log(ff());
+  console.log(ff());
+  ```
