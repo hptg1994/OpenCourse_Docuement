@@ -6,7 +6,7 @@
 
 文件目录结构：
 
-```
+```markdown
 root
 │   README.md
 │   server.js    
@@ -22,3 +22,6 @@ root
 └───static
 │   │   基础的前台文件结构
 ```
+
+
+
