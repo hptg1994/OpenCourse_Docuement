@@ -1,5 +1,3 @@
-const process = require("process");
+let config = require("./config")
+console.log(config);
 
-let mode = (process.platform === "darwin"?"dev":"prod")
-
-console.log(mode);
