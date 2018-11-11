@@ -260,15 +260,15 @@
 
 * 改变原型的指向，一定要注意的事情，when you change One obj's prototype , oen things that you must take a tension
 
-```javascript
-Person.prototype = {
+  ```javascript
+  Person.prototype = {
     name:'Pintaigao He',
     age:1,
     sex:"male"
     ....blablab,
-    !!!!!! -> constructor:Person // consturctor need to point back to Person !!!! because for now you direct assign one object to Person,it will lose the constructor property !!!
+    !!!!!! -> constructor:Person // consturctor need to point back to   Person !!!! because for now you direct assign one object to Person,it will lose the constructor property !!!
 }
-```
+  ```
 
 * **Dynamic Prototype:** it will make the syntax more like doing oop stuff
 
@@ -420,7 +420,7 @@ Person.prototype = {
   console.log(ff());
   ```
 
-### Apply and Call
+### 5. Apply and Call
 
 * ```javascript
   // 假设
@@ -482,4 +482,127 @@ Person.prototype = {
   }]);
   ```
 
+### 6. Bind
+
+- ```javascript
+  function Person(age) {
+    this.age = age;
+  }
+  Person.prototype.sleep = function () {
+    console.log("睡觉喽");
+    console.dir(this);
+  };
+  function Student(age) {
+    this.age = age;
+  }
+  var p = new Person(10);
+  var stu = new Student(20);
+  //此时stu对象没有sleep方法
+  //我希望stu对象有这个方法,此时如果使用apply和call只是借用而已,我希望自己就有
+  stu.sleep = p.sleep.bind(stu);//此时就相当于复制了
+  stu.sleep();//复制后调用
+  ```
+
+- ```javascript
+  //this的指向是发生变化的
+  //构造函数
+  function GetRandom() {
+    this.number = parseInt(Math.random() * 10 + 1);
+  }
+  //通过原型添加一个方法,作用:隔一段时间就显示产生的随机数
+  GetRandom.prototype.showTimeNumber = function () {
+    //定时器
+    //定时器本身是属于window的,所以,定时器中的函数中的this必然是window,所以,此时需要改变this的指向
+    //前面的this是当前的实例对象
+    //bind括号中的this---此时也是当前的实例对象,定时器中第一个参数是一个函数,而这个函数中的this是window,bind绑定后,要改变里面的window指向,传入了实例对象this
+    var ff=this.showNumber.bind(this);
+    window.setInterval(ff, 1000);
+  };
+  //通过原型添加一个方法,作用:输出数字的
+  GetRandom.prototype.showNumber = function () {
+    console.log(this.number);//随机数
+  };
+  //实例化
+  var gtr=new GetRandom();//
+  gtr.showTimeNumber();
+  
+  // this 的改变
+  setInterval(function f1(){
+      console.log(this)， =========> '会输出window'
+      1000
+  })
+  function f1() {
+  	console.log("您好");
+  }
+  setInterval(f1,1000);
+  var obj = {
+  	age: 20
+  };
+  function f1() {
+  	console.dir(this);//改变了,不再是window
+  }
+  //f1是函数的名字,函数的名字中存储的就是该函数的代码
+  var ff = f1.bind(obj);
+  setInterval(ff, 1000);
+  ```
+- 
+
+### 7. JS中的柯里化(Currying)：封装，作用：参数复用，延迟计算
+
+* 最终目的：传入多少个参数，都可以使用
+
+  ```javascript
+  let currying = function(fn){
+  	// 获取传入的实际的参数，（先去掉第一个参数，第一个参数是一个函数）
+      let args = [].slice.call(arguments,1);
+      return function(){
+          // 再次获取传入的事件的参数（再把第一次传入的参数形成的数组和第二次传入的参数形成的一个新的数组然后组合到一起）
+          let newArgs = args.concat([].slice.call(arguments));
+          return fn.apply(null,newArgs);
+      }
+  };
+  
+  // 计算和
+  let add = function(){
+      let args = [].slice.call(arguments);
+      let sum = 0;
+      for(let i = 0;i<args.length;i++){
+          sum += args[i];
+      }
+      return sum;
+  }
+  
+  console.log(currying(add,1,2,3,4,5,6) // ===> 21 
+  
+  ```
+
+* 参数复用的情况下实现延迟计算
+
+* ```javascript
+  let curryDelay = function(fn){
+      let args = [].slice.call(arguments,1);
+      let arg = args;
+      return function(){
+          //判断传入的参数形成的属性的长度是不是0（是不是传入了参数）， 与上面唯一的区别
+          if(arguments.length = 0){
+              //没有参数，直接提奥用
+              return fn.apply(null,ary);
+          }else{
+              //有参数，直接输出
+              ary = ary.concate([].slice.call(arguments));
+              console.log(ary)
+          }
+      }
+  };
+  
+  // 计算和
+  let curryAdd = curryDelay(add,1,2,3,4);
+  console.log(curryAdd()); //先就计算这么多
+  curryAdd(5); // 再加一个5
+  curryAdd(6); // 再加一个6
+  curryAdd(7); // 再加一个7
+  
+  ```
+
+### 8.Event
 
