@@ -8,6 +8,3 @@
 
 
 <p align="center">  <strong>Created by ﹫Pintaigao He</strong> </p>
-
-## Javascript
-富文本编辑器：[slate](https://github.com/ianstormtaylor/slate)
